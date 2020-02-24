@@ -27,19 +27,42 @@ exports.main = async (event, context) => {
     }
     let exam_id = data.exam_id;
     let standard = answerCache[exam_id] ? answerCache[exam_id].value : null;
+    if (standard) {
+        //判断是否超过问卷提交结束时间
+      let endTime = answerCache[exam_id].endTime;
+      if (endTime + 600 <= new Date().getTime()) {
+        result.errcode = 1;
+        result.errmsg = 'Have stopped to submit';
+        return;
+      }
+    }
     let score = 0;
     let exam_type = 1;
     //获取标准答案
     if (!standard) {
-      await db.collection('exam').doc(exam_id).field({ answer: true ,type:true }).get().then((res) => {
+      await db.collection('exam').doc(exam_id).field({ answer: true ,type:true ,endTime:true}).get().then((res) => {
+        //判断是否超过问卷提交结束时间
+        let endTime = res.data.endTime.getTime();
+        if(endTime+600<=new Date().getTime()){
+          result.errcode=1;
+          result.errmsg = 'Have stopped to submit';
+          return;
+        }
         standard = res.data.answer;
         exam_type = res.data.type;
         if(standard)
-        answerCache[exam_id] = { value: standard, timestamp: new Date().getTime() };
+        answerCache[exam_id] = { value: standard, timestamp: new Date().getTime() ,endTime:endTime };
+        else {
+          result.errcode = 1;
+          result.errmsg = 'Invalid ExamID';
+        }
+      }).catch((res) => {
+        result.errcode = 1;
+        result.errmsg = res;
       })
     }
     
-    if(!standard) return {errcode:1,errmsg:'Invalid ExamID'}
+    if (result.errcode) return result;
 
     for (let i in standard) {
       data.answer[i] = typeof data.answer[i] == 'Object' ? data.answer[i] : { value: data.answer[i] };
