@@ -6,6 +6,9 @@
  * updateExamOpenStatus:开放、关闭测试 {exam_id,open_status}
  * getRank:获取排行榜 {exam_id}
  * getExamList:获取测试列表 {page,limit}
+ * addExam:添加测试{}
+ * updateExam:更新测试{id,data}
+ * deleteExam:删除测试{id}
  */
 
 const cloud = require('wx-server-sdk')
@@ -15,7 +18,7 @@ const _ = db.command;
 const Result = ResultModel();
 let tokenCache = {timestamp:0,value:''};
 
-const routes = { login, updateExamOpenStatus,getRank,getExamList};
+const routes = { login, updateExamOpenStatus,getRank,getExamList,addExam,updateExam,deleteExam};
 
 
 async function login(params){
@@ -34,11 +37,43 @@ async function login(params){
 async function updateExamOpenStatus({exam_id,open_status}){
   let result={};
   await db.collection('exam').doc(exam_id).update({
-    open:open_status
+    data:{open:open_status}
   }).then(res=>{
-    result = res;
+    result = Result.put(res);
   }).catch(res=>{
-    result = res;
+    result = Result.error(res);
+  })
+  return result;
+}
+
+async function addExam(exam){
+  let result = {};
+  await db.collection('exam').add({
+    data:exam
+  }).then(res => {
+    result = Result.put(res);
+  }).catch(res => {
+    result = Result.error(res);
+  })
+  return result;
+}
+
+async function updateExam({id,data}){
+  let result = {};
+  await db.collection('exam').doc(id).update({ data}).then(res => {
+    result = Result.put(res);
+  }).catch(res => {
+    result = Result.error(res);
+  })
+  return result;
+}
+
+async function deleteExam({ id }) {
+  let result = {};
+  await db.collection('exam').doc(id).remove().then(res => {
+    result = Result.put(res);
+  }).catch(res => {
+    result = Result.error(res);
   })
   return result;
 }
@@ -76,6 +111,7 @@ async function service(funcName,params){
   }else{
     return await login(params);
   }
+  delete params["authorization"];
   return await routes[funcName](params);
 }
 
