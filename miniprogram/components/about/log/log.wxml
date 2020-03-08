@@ -1,0 +1,25 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">日志</view></cu-custom>
+<view class="cu-timeline">
+  <view class="cu-item text-blue">
+    <view class="bg-gradual-blue content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-blue">v1.0.1</view>
+        <view class="cu-tag line-white">2020/03/01</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>1.优化首页留白区域距离</view>
+        <view>2.优化阴影</view>
+        <view>3.引用渐变动画</view>
+      </view>
+    </view>   
+  </view>
+  <view class="cu-item text-blue">
+    <view class="bg-blue content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-blue">v1.0.0</view>
+        <view class="cu-tag line-white">2020/02/28</view>
+      </view>
+      <view class="margin-top-sm text-content">Demo基础页面版本</view>
+    </view>
+  </view>
+</view>

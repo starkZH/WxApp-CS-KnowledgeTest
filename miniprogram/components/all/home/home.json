@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "title-card": "../../../dist/title-card/title-card"
+
+  }
+}

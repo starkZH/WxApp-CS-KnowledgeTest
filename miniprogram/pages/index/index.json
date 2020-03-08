@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "title-card": "../../dist/title-card/title-card",
+    "all": "../../components/all/home/home",
+    "about": "../../components/about/home/home"
+
+  }
+
 }

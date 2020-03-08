@@ -1,0 +1,16 @@
+/* pages/all/home/home.wxss */
+.date-text{
+  font-size: 40rpx;
+  color: rgb(190, 182, 182);
+  font-weight: bold;
+  /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+}
+.head-title{
+  margin-left: 30rpx;
+  font-size: 70rpx;
+  color: rgb(11, 67, 119);
+  font-weight: bold;
+}
+/* .page-body {
+  overflow-x: hidden;
+} */

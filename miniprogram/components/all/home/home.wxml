@@ -1,0 +1,60 @@
+<!--pages/all/home/home.wxml-->
+
+<cu-custom bgColor="bg-gradual-white" CustomBar_status="{{true}}">
+  <view slot="content"></view>
+</cu-custom>
+<!-- <block class="box"> -->
+  <view class="cu-bar margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>
+      <text class="date-text" style="margin-top:-1rpx;">{{month}}月{{day}}日</text>
+    </view>
+  </view>
+  <view class="cu-bar">
+    <view class="action sub-title">
+      <text class="head-title text-bold">网安答题</text>
+      <text class="bg-blue" style="height:1rem"></text>
+    </view>
+    <block wx:if="{{!hasUserInfo && canIUse}}" hover-class="none">
+      <button class='cu-btn round bg-blue shadow' open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-cur="all" style="width:80px; margin-left: -10rpx;margin-right: 30rpx;"> 授权 </button>
+    </block>
+    <view wx:else class="cu-avatar xl round solids " style="background-image:url({{userInfo.avatarUrl}});margin-left: -10rpx;margin-right: 30rpx;"></view>
+  </view>
+  <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+    <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}" bindtap="swiperClick" data-link="{{item.link}}">
+      <view class="swiper-item">
+        <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+        <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+      </view>
+    </swiper-item>
+  </swiper>
+  <!-- <scroll-view scroll-x class="nav" style="margin-left:20rpx;">
+  <view class="cu-item {{index==TabCur?'text-blue cur':''}}" wx:for="{{nav_list}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+    {{item}}
+  </view>
+  </scroll-view> -->
+  <title-card
+    wx:for="{{10}}"
+    title='MidWest Pet'
+    context='Secure double latch step-through door access, Exercise Pen / Pet Playpen folds flat for convenient storage'
+    isShowBtns='{{true}}'
+    isLiked='{{false}}'
+    likeNumber='{{30}}'
+    bind:like='handleLike' class="bounceIn"></title-card>
+<!-- </block> -->
+<view class="cu-modal {{modalName=='fail'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">错误</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      授权失败
+    </view>
+  </view>
+</view>
+
+
+<!-- <text>pages/all/home/home.wxml</text> -->

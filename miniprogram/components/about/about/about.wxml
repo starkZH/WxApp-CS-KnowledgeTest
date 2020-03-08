@@ -1,0 +1,9 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">关于</view></cu-custom>
+<view class='margin-xl bg-white padding-xl radius shadow-lg'>
+  <view class='text-center margin-bottom text-lg  text-grey'>关于网安答题小助手</view>
+  <view class='text-content'>
+    <view>Hi！同学们~欢迎使用网安答题小助手！</view>
+    <view class='margin-top-sm'>该小程序提供给在校师生使用，以方便简洁的界面给同学们营造一种舒适的移动端答题氛围</view>
+    <view class='margin-top-sm'>更多功能敬请期待！</view>
+  </view>
+</view>
