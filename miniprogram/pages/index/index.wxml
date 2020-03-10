@@ -2,6 +2,7 @@
 <!-- <text>miniprogram/pages/index/index.wxml</text> -->
 <all wx:if="{{PageCur=='all'}}"></all>
 <about wx:if="{{PageCur=='about'}}"></about>
+<answer wx:if="{{PageCur=='exam'}}"></answer>
 <!-- <title-card
     wx:if="{{PageCur=='all'}}"
     wx:for="{{list}}"
@@ -20,6 +21,12 @@
           <image src="/images/tabbar/all{{PageCur=='all'?'_cur':''}}.png"></image>
         </view>
         <view class="{{PageCur=='all'?'text-blue':'text-gray'}}">首页</view>
+      </view>
+      <view class="action" bindtap="NavChange" data-cur="exam">
+        <view class='cuIcon-cu-image'>
+          <image src="/images/tabbar/exam{{PageCur=='exam'?'_cur':''}}.png"></image>
+        </view>
+        <view class="{{PageCur=='exam'?'text-blue':'text-gray'}}">已答</view>
       </view>
       <view class="action" bindtap="NavChange" data-cur="about">
         <view class='cuIcon-cu-image'>

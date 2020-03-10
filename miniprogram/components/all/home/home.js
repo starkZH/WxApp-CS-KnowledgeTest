@@ -23,9 +23,10 @@ Component({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    TabCur: 0,
     scrollLeft:0,
-    nav_list:['全部','未完成','已完成']
+    nav_list:['在线','模拟'],
+    TabCur: 1,
+    exam_list:[]
 
   },
   attached: function() {
@@ -67,7 +68,7 @@ Component({
         name: 'getHomeSettings',
         data: {},
         success: res => {
-          console.log('[云函数] [getExam] 调用成功：', res)
+          console.log('[云函数] [getHomeSettings] 调用成功：', res)
           let setting = res.result.data;
           setting.map((item,key)=>{
             item.id = key;
@@ -83,10 +84,10 @@ Component({
             icon: 'none',
             title: '调用失败',
           })
-          console.error('[云函数] [getExam] 调用失败：', err)
+          console.error('[云函数] [getHomeSettings] 调用失败：', err)
         }
       })
-    that.getExam();
+    this.getExam();
 
   },
   detached: function() {
@@ -106,7 +107,7 @@ Component({
       if(type == 'http')
       {
         wx.navigateTo({
-          url: link,
+          url: '/pages/webview/index?link='+link,
         })
       }
       if(type == 'exam')
@@ -116,27 +117,57 @@ Component({
           url: '/pages/exam/index?exam_id='+exam_id,
         })
       }
-
-
-
-
     },
     cardSwiper(e) {
       this.setData({
         cardCur: e.detail.current
       })
     },
-    getExam:function(res)
+    getExam:function()
     {
-      console.log(res);
-      console.log('res');
+      var that = this;
+      wx.cloud.callFunction({
+        name: 'getExamList',
+        data: {
+          // type:type
+        },
+        success: res => {
+          console.log('[云函数] [getExam] 调用成功：', res)
+          that.data.exam_list = res.result.data;
+          that.data.exam_list.map((item,key)=>{
+            // console.log(new Date(item.openTime).toLocaleString())
+            // console.log(new Date(item.endTime).toLocaleString())
+            if(new Date(item.endTime).getTime()<=new Date().getTime()){
+              item.status = 3;
+            }else if(new Date(item.openTime).getTime()>new Date().getTime()){
+              item.status = 1;
+            }else{
+              item.status = 2;
+            }
+            item.openTime = new Date(item.openTime).toLocaleString()
+            item.endTime = new Date(item.endTime).toLocaleString()
+          });
+          that.setData({
+            exam_list : that.data.exam_list
+          });
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '调用失败',
+          })
+          console.error('[云函数] [getExam] 调用失败：', err)
+        }
+      })
+
     },
     endSetInter: function(){
       var that = this;
       //清除计时器  即清除setInter
       clearInterval(that.data.setInter)
     },
-    tabSelect() {
+    tabSelect(e) {
+      // this.getExam(e.currentTarget.dataset.id);
       this.setData({
         TabCur: e.currentTarget.dataset.id,
         scrollLeft: (e.currentTarget.dataset.id-1)*60

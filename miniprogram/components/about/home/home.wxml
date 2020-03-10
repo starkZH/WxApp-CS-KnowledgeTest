@@ -29,7 +29,7 @@
         <text class="cuIcon-rankfill"></text> Rank</view>
     </view>
     <view class="flex flex-sub flex-direction">
-      <navigator class="content" url="/components/about/about/about" hover-class="none">
+      <navigator class="content" url="/pages/collection/index" hover-class="none">
       <view class="text-xxl text-green">{{favoritesCount}}</view>
       <view class="margin-top-sm">
         <text class="cuIcon-favorfill"></text> Favorites

@@ -27,6 +27,13 @@ Page({
       cardCur: e.detail.current
     })
   },
+  toResultPage()
+  {
+    wx.navigateTo({
+      url: '/pages/exam/result/index?exam_id='+this.data.exam_id,
+    });
+
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -43,23 +50,17 @@ Page({
           console.warn('[云函数] [getExam] 调用成功：', res)
           console.log(res)
           this.data.exam_data = res.result.data;
+          let endtime = this.data.exam_data.endTime;
           this.data.exam_id = options.exam_id;
           this.data.exam_data.openTime = new Date(this.data.exam_data.openTime).toLocaleString();
-          this.data.exam_data.endTime = new Date(this.data.exam_data.endTime).toLocaleString();
+          this.data.exam_data.endTime = new Date(endtime).toLocaleString();
+          this.data.exam_data.deadline = new Date(new Date(endtime).getTime()-1800000).toLocaleString();
           this.setData({
             exam_id:this.data.exam_id,
             exam_data:this.data.exam_data,
             showButton:true
           });
           wx.hideLoading()
-          // wx.showModal({
-          //   title: '获取成功',
-          //   content: '答题加油',
-          //   showCancel: false,
-          // })
-          // wx.showToast({
-          //   title: '发送成功，请返回微信主界面查看',
-          // })
         },
         fail: err => {
           wx.showToast({
@@ -73,19 +74,61 @@ Page({
   startAnswer:function(e)
   {
     console.log(e)
+    this.checkCanStart().then((res)=>{
+      if(res)
+      {
+        wx.navigateTo({
+          url: '/pages/exam/answer/index?exam_id='+this.data.exam_id,
+        })
+      }
+    });
+    return ;
     // if(!this.checkCanStart())
     // {
-    //   console.log('cannot')
+    //   return ;
     // }
-    wx.navigateTo({
-      url: '/pages/exam/answer/index?exam_id='+this.data.exam_id,
-    })
+    // wx.navigateTo({
+    //   url: '/pages/exam/answer/index?exam_id='+this.data.exam_id,
+    // })
   },
-  checkCanStart()
+  async checkCanStart()
   {
     // console.log(this.data.exam_data.openTime);
-    // console.log(this.data.exam_data.endTime);
+    // console.log(this.data.exam_data.deadline);
     // console.log((new Date()).toLocaleString());
+    var re = {};
+    await wx.cloud.callFunction({
+      name: 'checkSubmited',
+      data: {
+        exam_id: this.data.exam_id
+      }}).then(res=>{
+        wx.hideLoading();
+        console.log('[云函数] [checkSubmited] 调用成功：', res);
+        re = res
+      }).catch(res=>{
+        wx.hideLoading();
+        wx.showToast({
+          icon: 'none',
+          title: '调用失败',
+        });
+        console.error('[云函数] [checkSubmited] 调用失败：', err);
+        re = res;
+      });
+    if(re.result.data)
+    {
+      wx.showToast({
+        title: '你已完成答题',
+        icon: 'none',
+        duration: 2000,
+        mask: true
+      });
+      setTimeout(()=>{
+        wx.navigateTo({
+          url: '/pages/exam/result/index?exam_id='+this.data.exam_id,
+        })
+      },1500)
+      return false;
+    }
     if(this.data.exam_data.openTime>(new Date()).toLocaleString())
     {
       wx.showToast({
@@ -96,7 +139,7 @@ Page({
       });
       return false;
     }
-    if(this.data.exam_data.endTime<(new Date()).toLocaleString())
+    if(this.data.exam_data.deadline<(new Date()).toLocaleString())
     {
       wx.showToast({
         title: '本次答题已结束，感谢您的关注',
@@ -106,6 +149,7 @@ Page({
       });
       return false;
     }
+    // return false;
     return true;
   },
 

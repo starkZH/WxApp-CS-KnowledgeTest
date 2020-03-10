@@ -36,10 +36,10 @@
   <view class="col-1 margin-bottom">
     <van-button type="info" bindtap="startAnswer" loading="{{!showButton}}" disabled="{{!showButton}}">开始答题</van-button>
   </view>
-  <view class="col-1 margin-bottom">
+  <!-- <view class="col-1 margin-bottom">
     <van-button plain type="info">邀请好友</van-button>
-  </view>
-  <view class="col-1 margin-bottom">
+  </view> -->
+  <view class="col-1 margin-bottom" bindtap="toResultPage">
     <text class="cuIcon-rank lg text-gray">排行榜</text>
   </view>
 </view>

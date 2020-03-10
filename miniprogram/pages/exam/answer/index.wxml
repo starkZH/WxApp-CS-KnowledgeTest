@@ -1,7 +1,7 @@
 <!--miniprogram/pages/exam/answer/index.wxml-->
 <!-- <text>miniprogram/pages/exam/answer/index.wxml</text> -->
 <scroll-view scroll-y class="DrawerPage {{modalName=='viewModal'?'show':''}}">
-<cu-custom bgColor="bg-gradual-blue" isBack="{{false}}">
+<cu-custom bgColor="bg-gradual-blue" isBack="{{showAnswer}}">
   <view slot="content">答题</view>
 </cu-custom>
 <!-- </scroll-view> -->
@@ -23,7 +23,7 @@
       <view class="margin-top" wx:for="{{1}}" wx:key bindtap="submitAnswer" wx:if="{{!showAnswer}}">
         <text class="cuIcon-top text-blue margin-right"></text>立即交卷
       </view>
-      <view class="margin-top" wx:for="{{1}}" wx:key bindtap="favor" wx:if="{{showAnswer}}">
+      <view class="margin-top" wx:for="{{1}}" wx:key bindtap="favor" wx:if="{{showAnswer}}" bindtap="savePersonalQuestion">
         <text class="cuIcon-favor text-red margin-right"></text>收藏
       </view>
 

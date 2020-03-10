@@ -30,9 +30,12 @@ Component({
         }, 20)
       } else {
         that.setData({
-          rank: that.coutNum(1),
-          answerTotal: that.coutNum(100),
-          favoritesCount: that.coutNum(135)
+          // rank: that.coutNum(0),
+          // answerTotal: that.coutNum(0),
+          // favoritesCount: that.coutNum(0)
+          rank: '#',
+          answerTotal: '#',
+          favoritesCount: '#'
         })
       }
     }

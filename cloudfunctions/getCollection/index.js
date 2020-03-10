@@ -28,7 +28,7 @@ exports.main = async (event, context) => {
     });
 
   for (let val of cols) {
-    let item = {};
+    let item = {id:val._id};
     let question_id = val.question_id;
     //获取题目
     await db.collection('exam').where({

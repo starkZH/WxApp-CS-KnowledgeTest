@@ -1,0 +1,6 @@
+<!--miniprogram/pages/webview/index.wxml-->
+<!-- <text>miniprogram/pages/webview/index.wxml</text> -->
+<!-- <cu-custom bgColor="bg-gradual-white" isBack="{{true}}">
+  <view slot="content">Web</view>
+</cu-custom> -->
+<web-view src="{{link}}"></web-view>

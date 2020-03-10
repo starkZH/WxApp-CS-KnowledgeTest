@@ -1,0 +1,25 @@
+<!--components/answer/home/index.wxml-->
+<!-- <text>components/answer/home/index.wxml</text> -->
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">已答列表</view>
+</cu-custom>
+  <scroll-view scroll-x class="nav" style="margin-left:20rpx;">
+  <view class="cu-item {{index+1==TabCur?'text-blue cur':''}}" wx:for="{{nav_list}}" wx:key bindtap="tabSelect" data-id="{{index+1}}">
+    {{item}}
+  </view>
+  </scroll-view>
+  <title-card-cell
+    wx:for="{{answerList}}"
+    img=""
+    title="{{item.exam_name}}"
+    context=''
+    exam_id="{{item.exam_id}}"
+    rank="{{item.rank}}"
+    time_cost="{{item.time_cost}}"
+    score="{{item.score}}"
+    isShowBtns="{{'123'}}"
+    isLiked="{{'123'}}"
+    likeNumber="{{'123'}}"
+    bind:like='handleLike' class="bounceIn"></title-card-cell>
+        <!-- title="" -->
+        <!-- status="{{'123'}}" -->

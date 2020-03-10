@@ -2,7 +2,11 @@
   "pages": [
     "pages/index/index",
     "pages/exam/index",
-    "pages/exam/answer/index"
+    "pages/exam/answer/index",
+    "pages/exam/result/index",
+    "pages/webview/index",
+    "pages/collection/index",
+    "pages/collection/detail/index"
   ],
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
@@ -16,7 +20,8 @@
     "van-radio-group": "@vant/weapp/radio-group/index",
     "van-checkbox": "@vant/weapp/checkbox/index",
     "van-checkbox-group": "@vant/weapp/checkbox-group/index",
-    "van-action-sheet": "@vant/weapp/action-sheet/index"
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-tag": "@vant/weapp/tag/index"
   },
   "window": {
     "backgroundColor": "#F6F6F6",
