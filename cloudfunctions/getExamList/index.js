@@ -31,5 +31,17 @@ exports.main = async (event, context) => {
       result.errmsg= res;
     })
 
+  let fileList = [];
+  for (let val of result.data) {
+    val.img_id = val.img_id ? val.img_id:''
+    fileList.push(val.img_id);
+  }
+  fileList = await cloud.getTempFileURL({
+    fileList: fileList,
+  });
+  fileList = fileList.fileList;
+  for (let i in fileList) {
+    result.data[i].img_url = fileList[i].tempFileURL;
+  }
   return result
 }
