@@ -105,6 +105,9 @@ async function getExamList({page,limit}){
   }).catch(res=>{
     result = Result.error(res);
   })
+  await db.collection('exam').count().then(res=>{
+    result.count=res.total;
+  });
   return result; 
 }
 
@@ -129,13 +132,13 @@ async function service(funcName,params){
 function ResultModel(){
   const mapper={put,error,success};
   function put(data){
-    return {data:data,errcode:0};
+    return {data:data,code:0};
   }
   function error(errmsg) {
-    return { errmsg: errmsg, errcode: 1 };
+    return { errmsg: errmsg, code: 1 };
   }
   function success() {
-    return { errcode: 1 };
+    return { code: 1 };
   }
   return new Proxy({}, {
     get(target, propKey, receiver) {
