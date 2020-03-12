@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "title-card-cell": "../../../dist/title-card-cell/title-card"
+  }
+}

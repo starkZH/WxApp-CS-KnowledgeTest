@@ -10,24 +10,27 @@
     总人数:{{total_people}}
   </view> -->
   <view class='summary'>
-    开放时间:{{openTime}}
+    <text class="cuIcon-upstagefill margin-lr-s"></text>排名:{{rank}}
   </view>
   <view class='summary'>
-    截止时间:{{endTime}}
+    <text class="cuIcon-time margin-lr-s"></text>用时:{{time_cost}}s
+  </view>
+  <view class='summary'>
+    <text class="cuIcon-form margin-lr-s"></text>分数:{{score}}
   </view>
 
   <van-divider />
   <view class='buttons' style='display: {{isShowBtns ? "" : "none"}}'>
     <view class="vant-tag">
-      <van-tag wx:if="{{status==3}}" size="large">{{statusText[status].text}}</van-tag>
-      <van-tag wx:else type="{{statusText[status].tag_type}}" size="large">{{statusText[status].text}}</van-tag>
+      <!-- <van-tag wx:if="{{status==3}}" size="large">{{statusText[status].text}}</van-tag>
+      <van-tag wx:else type="{{statusText[status].tag_type}}" size="large">{{statusText[status].text}}</van-tag> -->
     </view>
     <view class='like'>
       <!-- <icon-button type='like' style='display: {{isLiked ? "none" : ""}};' bindtap='handleLike'></icon-button>
       <icon-button type='red-like' style='display: {{isLiked ? "" : "none"}};' bindtap='handleLike'></icon-button>
       <view class='like-number'>{{likeNumber}}</view> -->
       <navigator url="/pages/exam/index?exam_id={{exam_id}}" hover-class="none">
-        <view class="gotoAnswer">>前往答题</view>
+        <view class="gotoAnswer">>查看</view>
       </navigator>
     </view>
   </view>

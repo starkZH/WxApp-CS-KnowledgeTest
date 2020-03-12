@@ -19,10 +19,49 @@ Page({
     answer:[],
     question_index:0,
     question_total:0,
+    radio: '',
     exam_id:"",
     time_cost:1800,
-    radio: '',
     gridCol:3,
+  },
+  savePersonalQuestion()
+  {
+    // console.log(this.data.exam_id);
+    // console.log(this.data.question[this.data.question_index].id);
+    var that = this;
+    wx.showLoading({
+      title: '收藏中',
+    })
+    wx.cloud.callFunction({
+      name: 'savePersonalQuestion',
+      data: {
+         exam_id:this.data.exam_id,
+         question_id:this.data.question[this.data.question_index].id
+      },
+      success: res => {
+        wx.hideLoading()
+        if(res.result.errcode==1)
+        {
+          wx.showToast({
+            title: '请勿重复收藏',
+            icon:'none'
+          })
+        }else{
+          wx.showToast({
+            title: '收藏成功'
+          })
+        }
+
+      },
+      fail: err => {
+         wx.showToast({
+          icon: 'none',
+         title: '失败',
+        })
+        console.error('网络异常：', err)
+       }
+    })
+
   },
   showModal(e) {
     this.setData({
@@ -43,20 +82,21 @@ Page({
   },
   showAnswer()
   {
+    var that = this;
+    console.log(this.data.exam_id)
     wx.showLoading({
       title: '稍等',
     })
     wx.cloud.callFunction({
       name: 'getAnswer',
       data: {
-         exam_id:this.data.exam_id,
+         exam_id:that.data.exam_id,
       },
       success: res => {
         wx.hideLoading()
-        this.data.provide_answer = res.result.answer;
-        this.setData({
-          provide_answer:this.data.provide_answer,
-          showAnswer:true
+        that.data.provide_answer = res.result.answer;
+        that.setData({
+          provide_answer:that.data.provide_answer,
         });
       },
       fail: err => {
@@ -64,9 +104,12 @@ Page({
           icon: 'none',
          title: '失败',
         })
-        console.error('交卷网络异常：', err)
+        console.error('网络异常：', err)
        }
     })
+    this.setData({
+      showAnswer:true
+    });
     
   },
 
@@ -90,34 +133,36 @@ Page({
     });
   },
   timeUp(e) {
-    wx.showToast({
-      title: 'End',
-      icon:'none',
-      duration: 2000,
-      mask: true
-    });
+    // wx.showToast({
+    //   title: 'End',
+    //   icon:'none',
+    //   duration: 2000,
+    //   mask: true
+    // });
+    var that = this;
     const countDown = this.selectComponent('#count_down');
     countDown.pause();
     this.data.time_cost = (this.data.time - countDown.remain)/1000;
     this.setData({
       time_cost:this.data.time_cost
     });
-    wx.showLoading({title: '加载中', icon: 'loading', duration: 10000});
+    wx.showLoading({title: '交卷中', icon: 'loading', duration: 10000});
     wx.cloud.callFunction({
       name: 'submitExam',
       data: {
-         exam_id:this.data.exam_id,
-         time_cost:this.data.time_cost,
-         answer:this.data.answer
+         exam_id:that.data.exam_id,
+         time_cost:that.data.time_cost,
+         answer:that.data.answer
       },
       success: res => {
+        wx.hideLoading()
          wx.showToast({
            title: '交卷成功'
         })
-        wx.hideLoading()
-        this.showAnswer()
+        that.showAnswer()
       },
       fail: err => {
+        wx.hideLoading()
          wx.showToast({
           icon: 'none',
          title: '失败',
@@ -128,7 +173,7 @@ Page({
   },
   submitAnswer()
   {
-    const that = this;
+    var that = this;
     console.log('submit answer')
     let count = this.checkAnswerNotNull();
     if(count>0)
@@ -161,10 +206,25 @@ Page({
               answer:that.data.answer
             },
             success: res => {
-              wx.showToast({
-                title: '提交成功'
-              })
               wx.hideLoading()
+              if(res.result.errcode==1)
+              {
+                setTimeout(()=>{
+                  wx.showToast({
+                    title: '系统已截止,提交失败',
+                    icon:'none',
+                    duration:3000
+                  })
+                },1200)
+                // wx.hideLoading()
+              }else{
+                setTimeout(()=>{
+                  wx.showToast({
+                    title: '提交成功'
+                  })
+                  that.toResultPage();
+                },1200)
+              }
               that.showAnswer()
             },
             fail: err => {
@@ -197,6 +257,13 @@ Page({
       return count;
     }
     return 0;
+  },
+  toResultPage()
+  {
+    wx.navigateTo({
+      url: '/pages/exam/result/index?exam_id='+this.data.exam_id,
+    });
+
   },
 
   /**

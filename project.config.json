@@ -3,13 +3,14 @@
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
 		"urlCheck": true,
-		"es6": true,
+		"es6": false,
 		"enhance": true,
 		"postcss": true,
 		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": true,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
@@ -20,8 +21,7 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"nodeModules": true
+		}
 	},
 	"appid": "wxf3a46e219f7d1ac9",
 	"projectname": "%E7%BD%91%E5%AE%89%E7%AD%94%E9%A2%98%E5%B0%8F%E7%A8%8B%E5%BA%8F",
@@ -69,6 +69,14 @@
 					"id": -1,
 					"name": "pages/exam/answer/index",
 					"pathName": "pages/exam/answer/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "答题结果页",
+					"pathName": "pages/exam/result/index",
+					"query": "exam_id= 02b9b182-aba1-4dce-9892-2e2ae92ddc74",
 					"scene": null
 				}
 			]

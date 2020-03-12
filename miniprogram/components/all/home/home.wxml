@@ -29,17 +29,23 @@
     </swiper-item>
   </swiper>
   <!-- <scroll-view scroll-x class="nav" style="margin-left:20rpx;">
-  <view class="cu-item {{index==TabCur?'text-blue cur':''}}" wx:for="{{nav_list}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+  <view class="cu-item {{index+1==TabCur?'text-blue cur':''}}" wx:for="{{nav_list}}" wx:key bindtap="tabSelect" data-id="{{index+1}}">
     {{item}}
   </view>
   </scroll-view> -->
   <title-card
-    wx:for="{{10}}"
-    title='MidWest Pet'
-    context='Secure double latch step-through door access, Exercise Pen / Pet Playpen folds flat for convenient storage'
+    wx:for="{{exam_list}}"
+    img=""
+    title='{{item.name}}'
+    context=''
+    total_people="{{item.total_people}}"
+    openTime="{{item.openTime}}"
+    endTime="{{item.endTime}}"
+    status="{{item.status+0}}"
+    exam_id="{{item._id}}"
     isShowBtns='{{true}}'
     isLiked='{{false}}'
-    likeNumber='{{30}}'
+    likeNumber='{{1}}'
     bind:like='handleLike' class="bounceIn"></title-card>
 <!-- </block> -->
 <view class="cu-modal {{modalName=='fail'?'show':''}}">

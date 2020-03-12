@@ -1,0 +1,26 @@
+<!--miniprogram/pages/collection/detail/index.wxml-->
+<!-- <text>miniprogram/pages/collection/detail/index.wxml</text> -->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="content">题目</view>
+</cu-custom>
+<view class="padding" style="font-size:18px;">
+      <view class="col-1 margin-bottom" style="font-size:16px;">
+        <text style="color:grey;margin-right:10px;">[{{isMulti?'多选':'单选'}}]</text>
+        <!-- <text>{{question_index+1}}.{{exam_data.question[question_index].desc}}</text> -->
+        <text>{{exam_data.question.desc}}</text>
+      </view>
+      <van-radio-group value="{{ radio }}" bind:change="radioChange" wx:if="{{!isMulti}}">
+        <van-radio wx:for="{{exam_data.question.option}}" wx:key="index" name="{{index}}" class="padding" checked-color="{{showAnswer?(exam_data.answer.value==radio?'#07c160':'#FF0000'):''}}">
+        {{index}}.{{item}}
+        </van-radio>
+      </van-radio-group>
+      <van-checkbox-group value="{{ radio }}" bind:change="radioChange" wx:if="{{isMulti}}">
+        <van-checkbox wx:for="{{exam_data.question.option}}" wx:key="index" name="{{index}}" class="padding">{{index}}.{{item}}</van-checkbox>
+      </van-checkbox-group>
+    </view>
+    <!-- <view class="padding" style="font-size:18px;" wx:if="{{showAnswer}}">
+      所选答案：{{radio}}
+    </view> -->
+    <view class="padding" style="font-size:18px;" wx:if="{{showAnswer}}">
+      正确答案：{{exam_data.answer.value}}
+    </view>

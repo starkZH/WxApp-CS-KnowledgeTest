@@ -1,5 +1,9 @@
 // dist/cards/title-card/title-card.js
+const app = getApp();
 Component({
+  options: {
+    addGlobalClass: true,
+  },
   /**
    * 组件的属性列表
    */
@@ -8,10 +12,11 @@ Component({
     title: String,
     context: String,
     total_people: String,
-    openTime: String,
-    endTime: String,
     status:Number,
     exam_id:String,
+    rank:String,
+    time_cost:String,
+    score:String,
     isShowBtns: {
       type: Boolean,
       value: false,
@@ -33,7 +38,8 @@ Component({
       1:{text:'未开始',tag_type:'primary'},
       2:{text:'进行中',tag_type:'success'},
       3:{text:'已截止',tag_type:'success'}
-    }
+    },
+    userInfo:app.globalData.userInfo
   },
 
   /**
