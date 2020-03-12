@@ -93,6 +93,8 @@ async function getRank({exam_id}){
 }
 
 async function getExamList({page,limit}){
+  page = Number(page);
+  limit = Number(limit);
   if(isNaN(limit))
     limit = 10;
   if(isNaN(page))
