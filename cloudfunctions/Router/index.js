@@ -18,20 +18,26 @@ const _ = db.command;
 const Result = ResultModel();
 let tokenCache = {timestamp:0,value:''};
 
-const routes = { login, updateExamOpenStatus,getRank,getExamList,addExam,updateExam,deleteExam};
+const routes = { login,logout, updateExamOpenStatus,getRank,getExamList,addExam,updateExam,deleteExam};
 
 
 async function login(params){
   let result = {};
   await db.collection('admin_user').where(params).limit(1).get().then((res) => {
     if (res.data.length > 0) {
-      result = Result.put({ token: makeToken() });
-      tokenCache = { value: result.token, timestamp: new Date().getTime() };
+      let token = makeToken()
+      result = Result.put({ token });
+      tokenCache = { value: token, timestamp: new Date().getTime() };
     } else result = Result.error('用户名或密码错误')
   }).catch(() => {
     result = Result.error('登录失败')
   })
   return result;
+}
+
+function logout(){
+  tokenCache = { };
+  return Result.success();
 }
 
 async function updateExamOpenStatus({exam_id,open_status}){
@@ -102,13 +108,15 @@ async function getExamList({page,limit}){
 
 let expire_seconds = 24*3600*1000;
 async function service(funcName,params){
+  console.log(funcName,params,tokenCache)
   if(funcName!='login'){
     let authorization = params.authorization;
     let timestamp = tokenCache.timestamp;
-    if(!timestamp||timestamp+expire_seconds<new Date().getTime()){
+    if (!authorization||tokenCache.value!=authorization||!timestamp||timestamp+expire_seconds<new Date().getTime()){
       return Result.error('token无效或已过期，请重新登录');
     }
-  }else{
+  } else {
+    delete params["authorization"];
     return await login(params);
   }
   delete params["authorization"];
