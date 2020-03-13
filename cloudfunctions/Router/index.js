@@ -18,7 +18,7 @@ const _ = db.command;
 const Result = ResultModel();
 let tokenCache = {timestamp:0,value:''};
 
-const routes = { login,logout, updateExamOpenStatus,getRank,getExamList,addExam,updateExam,deleteExam};
+const routes = { login,logout, updateExamOpenStatus,getRank,getExamList,addExam,updateExam,deleteExam ,getExam};
 
 
 async function login(params){
@@ -38,6 +38,16 @@ async function login(params){
 function logout(){
   tokenCache = { };
   return Result.success();
+}
+
+async function getExam({ exam_id}){
+  let result = {};
+  await db.collection('exam').doc(exam_id).get().then(res => {
+    result = Result.put(res.data);
+  }).catch(res => {
+    result = Result.error(res);
+  })
+  return result;
 }
 
 async function updateExamOpenStatus({exam_id,open_status}){
