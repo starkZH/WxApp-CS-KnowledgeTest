@@ -18,12 +18,15 @@ const _ = db.command;
 const Result = ResultModel();
 let tokenCache = {timestamp:0,value:''};
 
-const routes = { login,logout, updateExamOpenStatus,getRank,getExamList,addExam,updateExam,deleteExam ,getExam};
+const routes = { login, logout, updateExamOpenStatus, getRank, getExamList, addExam, updateExam, deleteExam, getExam, getBaseInfo, getBaseSettings, deleteBaseSetting, updateBaseSetting, addBaseSetting};
 
 
 async function login(params){
   let result = {};
-  await db.collection('admin_user').where(params).limit(1).get().then((res) => {
+  await db.collection('admin_user').where({
+    username: params.username,
+    password: params.password
+  }).limit(1).get().then((res) => {
     if (res.data.length > 0) {
       let token = makeToken()
       result = Result.put({ token });
@@ -38,6 +41,56 @@ async function login(params){
 function logout(){
   tokenCache = { };
   return Result.success();
+}
+/**
+ * 获取后台基本信息
+ */
+async function getBaseInfo(){
+  let result = {};
+  let data ={};
+  await db.collection('exam').count().then(res=>{
+    data.exam_num = res.total;
+  })
+  await db.collection('sys_user').count().then(res => {
+    data.total_user = res.total;
+  })
+  await db.collection('answer_formal').count().then(res => {
+    data.formal_answer_num = res.total;
+  })
+  await db.collection('answer_simulation').count().then(res => {
+    data.simulation_answer_num = res.total;
+  })
+  result = Result.put(data)
+
+  return result;
+}
+
+async function getBaseSettings() {
+  let result = {};
+  await cloud.callFunction({
+    name:'getHomeSettings'
+  }).then(res=>{
+    result = Result.put(res.result);
+  })
+  return result;
+}
+
+async function deleteBaseSetting({id}){
+  await db.collection('base_setting').doc(id).remove();
+  return {code:0}
+}
+
+async function updateBaseSetting({ id, data }) {
+  let result = {};
+  await db.collection('base_setting').doc(id).update({data}).then(res=>{
+    result = Result.put(res.stats);
+  });
+  return result;
+}
+
+async function addBaseSetting({ data }) {
+  await db.collection('base_setting').add({ data });
+  return { code: 0 }
 }
 
 async function getExam({ exam_id}){
