@@ -18,7 +18,8 @@ const _ = db.command;
 const Result = ResultModel();
 let tokenCache = {timestamp:0,value:''};
 
-const routes = { login, logout, updateExamOpenStatus, getRank, getExamList, addExam, updateExam, deleteExam, getExam, getBaseInfo, getBaseSettings, deleteBaseSetting, updateBaseSetting, addBaseSetting};
+const routes = { login, logout, updateExamOpenStatus, getRank, getExamList, addExam, updateExam, deleteExam, getExam, getBaseInfo, 
+getBaseSettings, deleteBaseSetting, updateBaseSetting, addBaseSetting};
 
 
 async function login(params){
@@ -100,6 +101,13 @@ async function getExam({ exam_id}){
   }).catch(res => {
     result = Result.error(res);
   })
+  try {
+    await cloud.getTempFileURL({
+      fileList: [result.data.img_id]
+    }).then(res => {
+      result.data.img_url = res.fileList[0];
+    })
+  }catch(e){}
   return result;
 }
 
