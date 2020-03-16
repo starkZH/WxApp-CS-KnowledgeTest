@@ -117,6 +117,8 @@ async function updateExamOpenStatus({exam_id,open_status}){
 
 async function addExam(exam){
   let result = {};
+  exam.openTime = new Date(exam.openTime)
+  exam.endTime = new Date(exam.endTime)
   await db.collection('exam').add({
     data:exam
   }).then(res => {
@@ -129,6 +131,8 @@ async function addExam(exam){
 
 async function updateExam({id,data}){
   let result = {};
+  data.openTime = new Date(data.openTime)
+  data.endTime = new Date(data.endTime)
   await db.collection('exam').doc(id).update({ data}).then(res => {
     result = Result.put(res);
   }).catch(res => {
