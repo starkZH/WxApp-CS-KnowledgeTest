@@ -19,7 +19,8 @@ const Result = ResultModel();
 let tokenCache = {timestamp:0,value:''};
 
 const routes = { login, logout, updateExamOpenStatus, getRank, getExamList, addExam, updateExam, deleteExam, getExam, getBaseInfo, 
-getBaseSettings, deleteBaseSetting, updateBaseSetting, addBaseSetting};
+getBaseSettings, deleteBaseSetting, updateBaseSetting, addBaseSetting,
+getTempFileUrl};
 
 
 async function login(params){
@@ -43,6 +44,17 @@ function logout(){
   tokenCache = { };
   return Result.success();
 }
+
+async function getTempFileUrl({data}){
+  let result = {};
+  await cloud.getTempFileURL({
+    fileList: data
+  }).then(res=>{
+    result = Result.put(res.fileList)
+  })
+  return result;
+}
+
 /**
  * 获取后台基本信息
  */
