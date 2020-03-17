@@ -10,7 +10,7 @@
   </scroll-view>
   <title-card-cell
     wx:for="{{answerList}}"
-    img=""
+    img="{{item.img_id?item.img_url:''}}"
     title="{{item.exam_name}}"
     context=''
     exam_id="{{item.exam_id}}"

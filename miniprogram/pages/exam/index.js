@@ -58,8 +58,20 @@ Page({
           this.setData({
             exam_id:this.data.exam_id,
             exam_data:this.data.exam_data,
-            showButton:true
+            showButton:true,
           });
+          let img_id = this.data.exam_data.img_id;
+          if(img_id)
+          {
+            this.data.swiperList.push({
+              id:1,
+              type: 'image',
+              url: img_id,
+            });
+            this.setData({
+              swiperList:this.data.swiperList
+            });
+          }
           wx.hideLoading()
         },
         fail: err => {

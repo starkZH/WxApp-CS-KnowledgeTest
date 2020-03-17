@@ -94,10 +94,14 @@ Page({
       },
       success: res => {
         wx.hideLoading()
-        that.data.provide_answer = res.result.answer;
-        that.setData({
-          provide_answer:that.data.provide_answer,
-        });
+        if(res.result)
+        {
+          that.data.provide_answer = res.result.answer;
+          that.setData({
+            provide_answer:that.data.provide_answer,
+          });
+        }
+        
       },
       fail: err => {
          wx.showToast({

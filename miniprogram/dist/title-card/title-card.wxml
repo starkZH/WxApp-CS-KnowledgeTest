@@ -1,7 +1,7 @@
 <!--dist/cards/title-card/title-card.wxml-->
 <view class='wx-cards-title-card'>
   <view class='pc'>
-    <image mode='widthFix' src="{{img?img:'../../images/wadt.png'}}"></image>
+    <image mode='widthFix' src="{{img?img:'../../images/wadt.png'}}" style="max-height:270px;"></image>
   </view>
   <view class='title'>
     {{title}}
