@@ -10,7 +10,7 @@
  * updateExam:更新测试{id,data}
  * deleteExam:删除测试{id}
  */
-
+const Token = require('./Token.js') 
 const cloud = require('wx-server-sdk')
 cloud.init();
 const db = cloud.database();
@@ -25,16 +25,17 @@ getTempFileUrl};
 
 async function login(params){
   let result = {};
-  await db.collection('admin_user').where({
+  let userInfo = {
     username: params.username,
     password: params.password
-  }).limit(1).get().then((res) => {
+  };
+  await db.collection('admin_user').where(userInfo).limit(1).get().then((res) => {
     if (res.data.length > 0) {
-      let token = makeToken()
+      let token = Token.encrypt(userInfo, '1d')
       result = Result.put({ token });
-      tokenCache = { value: token, timestamp: new Date().getTime() };
     } else result = Result.error('用户名或密码错误')
-  }).catch(() => {
+  }).catch((res) => {
+    console.log(res)
     result = Result.error('登录失败')
   })
   return result;
@@ -203,13 +204,11 @@ async function getExamList({page,limit}){
   return result; 
 }
 
-let expire_seconds = 24*3600*1000;
 async function service(funcName,params){
   console.log(funcName,params,tokenCache)
   if(funcName!='login'){
-    let authorization = params.authorization;
-    let timestamp = tokenCache.timestamp;
-    if (!authorization||tokenCache.value!=authorization||!timestamp||timestamp+expire_seconds<new Date().getTime()){
+    let res = Token.decrypt(params.authorization);
+    if (!res.valid){
       return Result.error('token无效或已过期，请重新登录');
     }
   } else {
@@ -237,15 +236,6 @@ function ResultModel(){
       return mapper[propKey];
     },
   });
-}
-
-function makeToken(){
-  let res='';
-  let str='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-  for(let i=0;i<64;i++){
-    res += str.charAt(Math.random()*(str.length)); 
-  }
-  return res;
 }
 
 // 云函数入口函数
