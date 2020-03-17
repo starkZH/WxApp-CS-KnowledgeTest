@@ -1,5 +1,20 @@
 <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">日志</view></cu-custom>
 <view class="cu-timeline">
+<view class="cu-item text-blue">
+    <view class="bg-gradual-blue content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-blue">v2.0.0</view>
+        <view class="cu-tag line-white">2020/03/17</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>1.预上线版本</view>
+        <view>2.优化用户界面</view>
+        <view>3.修复答题逻辑</view>
+        <view>4.允许管理员自定义测试主题图</view>
+        <view>5.时间格式修改</view>
+      </view>
+    </view>   
+  </view>
   <view class="cu-item text-blue">
     <view class="bg-gradual-blue content shadow">
       <view class="cu-capsule radius">

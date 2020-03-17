@@ -5,6 +5,7 @@
     "about": "../../components/about/home/home",
     "answer": "../../components/answer/home/index"
 
-  }
+  },
+  "enablePullDownRefresh": true
 
 }

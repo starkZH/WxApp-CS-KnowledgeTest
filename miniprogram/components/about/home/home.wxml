@@ -14,7 +14,7 @@
     </view>
     <image src="https://www.charleschr.xyz/publicimages/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>
-  <view class="padding flex text-center text-grey bg-white shadow-warp">
+  <!-- <view class="padding flex text-center text-grey bg-white shadow-warp">
     <view class="flex flex-sub flex-direction solid-right">
       <navigator class="content" url="/pages/exam/index" hover-class="none">
       <view class="text-xxl text-orange">{{answerTotal}}</view>
@@ -36,8 +36,15 @@
       </view>
       </navigator>
     </view>
-  </view>
+  </view> -->
   <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/collection/index" hover-class="none">
+        <!-- <image src="/images/css.png" class="png" mode="aspectFit"></image> -->
+        <text class="cuIcon-favorfill text-blue"></text>
+        <text class="text-grey">收藏</text>
+      </navigator>
+    </view>
     <view class="cu-item arrow">
       <view class="content" bindtap="CopyLink" data-link="https://css.dgut.edu.cn/">
         <text class="cuIcon-global text-blue"></text>

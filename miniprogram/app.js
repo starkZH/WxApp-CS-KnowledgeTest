@@ -25,6 +25,19 @@ App({
               // console.log(res)
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
+              setTimeout(function(){
+                wx.cloud.callFunction({
+                  name: 'saveUserInfo',
+                  data: res.userInfo,
+                  success: res => {
+                    console.log('[云函数] [saveUserInfo] 调用成功：', res)
+                  },
+                  fail: err => {
+                    console.error('[云函数] [saveUserInfo] 调用失败：', err)
+                  }
+                });
+              },1500)
+              
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {

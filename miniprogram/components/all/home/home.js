@@ -176,6 +176,16 @@ Component({
     getUserInfo: function (e) {
       console.log(e)
       if (e.detail.userInfo) {
+        wx.cloud.callFunction({
+          name: 'saveUserInfo',
+          data: e.detail.userInfo,
+          success: res => {
+            console.log('[云函数] [saveUserInfo] 调用成功：', res)
+          },
+          fail: err => {
+            console.error('[云函数] [saveUserInfo] 调用失败：', err)
+          }
+        });
         app.globalData.userInfo = e.detail.userInfo
         this.setData({
           userInfo: e.detail.userInfo,

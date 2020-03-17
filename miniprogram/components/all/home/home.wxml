@@ -23,8 +23,8 @@
   <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
     <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}" bindtap="swiperClick" data-link="{{item.link}}">
       <view class="swiper-item">
-        <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
-        <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+        <image src="{{item.img_url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+        <video src="{{item.img_url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
       </view>
     </swiper-item>
   </swiper>
@@ -35,7 +35,7 @@
   </scroll-view> -->
   <title-card
     wx:for="{{exam_list}}"
-    img=""
+    img="{{item.img_url?item.img_url:''}}"
     title='{{item.name}}'
     context=''
     total_people="{{item.total_people}}"
