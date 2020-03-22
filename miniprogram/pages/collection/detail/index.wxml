@@ -15,7 +15,7 @@
         </van-radio>
       </van-radio-group>
       <van-checkbox-group value="{{ radio }}" bind:change="radioChange" wx:if="{{isMulti}}">
-        <van-checkbox wx:for="{{exam_data.question.option}}" wx:key="index" name="{{index}}" class="padding">{{index}}.{{item}}</van-checkbox>
+        <van-checkbox wx:for="{{exam_data.question.option}}" wx:key="index" name="{{index}}" class="padding" checked-color="{{showAnswer?(exam_data.answer.value==radio?'#07c160':'#FF0000'):''}}">{{index}}.{{item}}</van-checkbox>
       </van-checkbox-group>
     </view>
     <!-- <view class="padding" style="font-size:18px;" wx:if="{{showAnswer}}">

@@ -84,29 +84,28 @@ Page({
   {
     var that = this;
     console.log(this.data.exam_id)
-    wx.showLoading({
-      title: '稍等',
-    })
+    // wx.showLoading({
+    //   title: '稍等',
+    // })
     wx.cloud.callFunction({
       name: 'getAnswer',
       data: {
          exam_id:that.data.exam_id,
       },
       success: res => {
-        wx.hideLoading()
+        // wx.hideLoading()
         if(res.result)
         {
-          that.data.provide_answer = res.result.answer;
+          that.data.provide_answer = res.result.data.answer;//res.result.answer;
           that.setData({
             provide_answer:that.data.provide_answer,
           });
         }
-        
       },
       fail: err => {
          wx.showToast({
           icon: 'none',
-         title: '失败',
+          title: '失败',
         })
         console.error('网络异常：', err)
        }
@@ -130,9 +129,18 @@ Page({
 
   },
   radioChange(event) {
-    this.data.answer[this.data.question_index].value = event.detail;
+    var arr = event.detail;
+    if(typeof arr == "object")
+    {
+      arr.sort(function (n,m){
+        if(n<m) return -1;
+        else if(n>m) return 1;
+        else return 0;
+      });
+    }
+    this.data.answer[this.data.question_index].value = arr;//event.detail;
     this.setData({
-      radio: event.detail,
+      radio: arr,//event.detail,
       answer:this.data.answer
     });
   },
@@ -151,12 +159,13 @@ Page({
       time_cost:this.data.time_cost
     });
     wx.showLoading({title: '交卷中', icon: 'loading', duration: 10000});
+    var answer_list = this.getAnswerToString();
     wx.cloud.callFunction({
       name: 'submitExam',
       data: {
          exam_id:that.data.exam_id,
          time_cost:that.data.time_cost,
-         answer:that.data.answer
+         answer:answer_list//that.data.answer
       },
       success: res => {
         wx.hideLoading()
@@ -175,6 +184,25 @@ Page({
        }
     })
   },
+  getAnswerToString()
+  {
+    let stringAnswer = [];
+    this.data.answer.map((item)=>{
+      if(item.value&&typeof item.value=='object')
+      {
+        stringAnswer.push({value:item.value.join(',')});
+      }else{
+        if(!item.value)
+        {
+          stringAnswer.push({value:""});
+        }else{
+          stringAnswer.push({value:item.value});
+        }
+      }
+    });
+    // console.log(stringAnswer);
+    return stringAnswer;
+  },
   submitAnswer()
   {
     var that = this;
@@ -189,6 +217,7 @@ Page({
         mask: true
       });
     }
+    var answer_list = this.getAnswerToString();
     wx.showModal({
       title: '提示',
       content: '确认交卷',
@@ -207,7 +236,7 @@ Page({
             data: {
               exam_id:that.data.exam_id,
               time_cost:that.data.time_cost,
-              answer:that.data.answer
+              answer:answer_list,//that.data.answer
             },
             success: res => {
               wx.hideLoading()
