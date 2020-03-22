@@ -65,13 +65,13 @@ exports.main = async (event, context) => {
     if (result.errcode) return result;
 
     for (let i in standard) {
-      data.answer[i] = typeof data.answer[i] == 'Object' ? data.answer[i] : { value: data.answer[i] };
       data.answer[i].id = standard[i].id;
       //判断答案
       if (standard[i].value == data.answer[i].value) {
         score += Number(standard[i].score);
         //答案正确
         data.answer[i].result = 1;
+        data.answer[i].score = standard[i].score;
       } else
         data.answer[i].result = 0;
     }
