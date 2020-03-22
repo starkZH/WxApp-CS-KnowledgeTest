@@ -15,14 +15,12 @@ exports.main = async (event, context) => {
   let field = { answer: true }
   if (Boolean(event.get_question))
   field.question = true;
-  await db.collection('exam').field(field)
-  .where({
-    _id:_.eq(exam_id),
-    endTime:_.lt(new Date())
-  })
-  .limit(1)
+  await db.collection('exam').doc(exam_id).field(field)
   .get().then(data => {
-    res=data.data[0];
+    res.data=data.data;
+    if(res.type==1&&new Date().getTime()< res.endTime.getTime()){
+      res={errmsg:'考试未结束',errcode:1};
+    }
   }).catch((res) => {
     res.errcode = 1;
     res.errmsg = '答案读取失败:'+res
