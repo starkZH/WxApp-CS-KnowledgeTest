@@ -45,7 +45,7 @@
               <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
               <text class="cuIcon-messagefill margin-lr-xs"></text> 30 -->
               <text class="cuIcon-upstagefill margin-lr-xs"></text> {{item.score}}
-              <text class="cuIcon-timefill margin-lr-s"></text> {{item.time_cost/1000}}s
+              <text class="cuIcon-timefill margin-lr-s"></text> {{item.time_cost}}s
               <text class="cuIcon-rankfill margin-lr-s"></text> {{item.rank}}
             </view>
           </view>

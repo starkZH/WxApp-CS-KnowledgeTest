@@ -46,7 +46,7 @@
     isShowBtns='{{true}}'
     isLiked='{{false}}'
     likeNumber='{{1}}'
-    bind:like='handleLike' class="bounceIn"></title-card>
+    bind:like='handleLike'></title-card>
 <!-- </block> -->
 <view class="cu-modal {{modalName=='fail'?'show':''}}">
   <view class="cu-dialog">

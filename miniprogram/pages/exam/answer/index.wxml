@@ -31,19 +31,21 @@
     <van-divider />
     <view class="padding" style="font-size:18px;">
       <view class="col-1 margin-bottom" style="font-size:16px;">
-        <text style="color:grey;margin-right:10px;">[单选]</text>
+      <text style="color:grey;margin-right:10px;" wx:if="{{exam_data.question[question_index].type==2}}">[判断]</text>
+      <text style="color:grey;margin-right:10px;" wx:else>[{{exam_data.question[question_index].type==0?'单选':'多选'}}]</text>
         <text>{{question_index+1}}.{{exam_data.question[question_index].desc}}</text>
       </view>
-      <van-radio-group value="{{ radio }}" bind:change="radioChange">
+      <van-checkbox-group value="{{ radio }}" bind:change="radioChange" wx:if="{{exam_data.question[question_index].type==1}}">
+        <van-checkbox  wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding"  checked-color="{{showAnswer?(provide_answer[question_index].value==radio?'#07c160':'#FF0000'):''}}">
+          {{index}}.{{item}}
+        </van-checkbox>
+      </van-checkbox-group>
+      <van-radio-group value="{{ radio }}" bind:change="radioChange" wx:else>
         <van-radio wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding" checked-color="{{showAnswer?(provide_answer[question_index].value==radio?'#07c160':'#FF0000'):''}}">
         {{index}}.{{item}}
         </van-radio>
       </van-radio-group>
-      <van-checkbox-group value="{{ result }}" bind:change="onChange" wx:if="{{false}}">
-        <van-checkbox name="a">复选框 a</van-checkbox>
-        <van-checkbox name="b">复选框 b</van-checkbox>
-        <van-checkbox name="c">复选框 c</van-checkbox>
-      </van-checkbox-group>
+      
     </view>
     <view class="padding" style="font-size:18px;" wx:if="{{showAnswer}}">
       所选答案：{{radio}}
