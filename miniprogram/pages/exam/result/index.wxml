@@ -1,26 +1,30 @@
 <!--miniprogram/pages/exam/result/index.wxml-->
 <!-- <text>miniprogram/pages/exam/result/index.wxml</text> -->
 <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
-  <view slot="backText">返回</view>
+<!-- <cu-custom bgColor="" isBack="{{true}}" style="background-color:#0eaaf5;"> -->
+  <!-- <view slot="backText">返回</view> -->
   <view slot="content">结果</view>
 </cu-custom>
+<!-- <image class='background' src="../../../images/res_bk.png"></image> -->
 <view class="grid col-1 text-center"  style="display:flex;justify-content: center;" wx:for="{{1}}" wx:key>
-  <view class="margin-top" wx:for="{{6}}">
+  <view class="margin-top" wx:for="{{2}}">
   </view>
-  <image src="/images/result_head.png" mode="widthFix"></image>
+  <!-- <image src="/images/result_head.png" mode="widthFix"></image> -->
+  <image src="/images/d2.png" mode="widthFix"></image>
 </view>
+<!-- <view class="cu-card case" style="padding-top:40%;padding-left:26rpx;width:96%;"> -->
 <view class="cu-card case">
   <view class="cu-item shadow">
     <view class="image">
       <!-- <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="widthFix"></image> -->
       <image src="/images/result_image.png" mode="widthFix"></image>
       <view class="cu-tag bg-blue">CSS</view>
-      <view class="cu-bar bg-shadeBottom">
-        <!-- <text class="text-cut">我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。</text> -->
-      </view>
+      <!-- <view class="cu-bar bg-shadeBottom">
+        <text class="text-cut">我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。</text>
+      </view> -->
     </view>
     <view class="cu-list menu-avatar">
-      <view class="cu-item">
+      <view class="cu-item" style="background-color:#ecf5ff">
         <view class="cu-avatar round lg" style="background-image:url({{userInfo.avatarUrl}});"></view>
         <view class="content flex-sub">
           <view class="text-grey">{{userInfo.nickName}}</view>
@@ -34,23 +38,27 @@
           </view>
         </view>
       </view>
+      <scroll-view scroll-y="true" class="indexes" style="height: 300rpx;white-space:nowrap;" scroll-with-animation="true" style="background-color:#ecf5ff">
+      <view class="cu-list menu-avatar no-padding">
       <view class="cu-item" wx:for="{{rank_list}}" wx:key>
         <view class="cu-avatar round lg" style="background-image:url({{item.userInfo.avatarUrl?item.userInfo.avatarUrl:'../../../images/default_head.png'}});"></view>
         <view class="content flex-sub">
           <view class="text-grey">{{item.userInfo.nickName?item.userInfo.nickName:'student'}}</view>
           <view class="text-gray text-sm flex justify-between">
             #
-            <view class="text-gray text-sm">
+            <view class="text-gray text-xl">
               <!-- <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
               <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
               <text class="cuIcon-messagefill margin-lr-xs"></text> 30 -->
-              <text class="cuIcon-upstagefill margin-lr-xs"></text> {{item.score}}
-              <text class="cuIcon-timefill margin-lr-s"></text> {{item.time_cost}}s
-              <text class="cuIcon-rankfill margin-lr-s"></text> {{item.rank}}
+              <text class="cuIcon-upstagefill text-yellow margin-lr-xs"></text> {{item.score}}
+              <text class="cuIcon-timefill text-blue margin-lr-s"></text> {{item.time_cost}}s
+              <text class="cuIcon-rankfill text-green margin-lr-s"></text> {{item.rank}}
             </view>
           </view>
         </view>
       </view>
+      </view>
+      </scroll-view>
 
     </view>
   </view>
