@@ -139,6 +139,7 @@ async function updateExamOpenStatus({exam_id,open_status}){
 async function addExam(exam){
   let result = {};
   exam.openTime = new Date(exam.openTime)
+  exam.createTime = new Date(exam.createTime)
   exam.endTime = new Date(exam.endTime)
   await db.collection('exam').add({
     data:exam
@@ -193,7 +194,7 @@ async function getExamList({page,limit}){
   if(isNaN(page))
     page = 1;
   let result = {};
-  await db.collection('exam').orderBy('createTime','desc').skip((page-1)*limit).limit(limit).get().then((res)=>{
+  await db.collection('exam').orderBy('openTime','desc').skip((page-1)*limit).limit(limit).get().then((res)=>{
     result = Result.put(res.data);
   }).catch(res=>{
     result = Result.error(res);
