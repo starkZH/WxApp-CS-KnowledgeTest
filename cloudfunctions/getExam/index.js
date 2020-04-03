@@ -19,10 +19,14 @@ exports.main = async (event, context) => {
     //优先从缓存读取
     let exam = examCache[exam_id] ? examCache[exam_id].value : null;
     if (!exam)
-      await db.collection('exam').field({ answer: false }).where({ _id: exam_id, open: _.eq(1) }).get().then(res => {
+      await db.collection('exam').doc(exam_id).field({ answer: false }).get().then(res => {
         let cache = false;
-        let data = res.data[0];
-        let openTime = new Date(res.openTime).getTime();
+        let data = res.data;
+        if(!data.open){
+          result={errcode:1,errmsg:'问卷未开放'};
+          return;
+        }
+        let openTime = data.openTime.getTime();
         let current = new Date().getTime();
         delete data['answer']
         exam = data;
@@ -30,20 +34,22 @@ exports.main = async (event, context) => {
           delete exam['question'];
           result.errcode = 1;
           result.errmsg = '问卷尚未开始';
-          if (openTime - currentTime>=600)
+          if (openTime - current<=600)
             cache = true;
+          else return;
         } else cache = true;
 
           if (cache)
           //放进缓存
           examCache[exam_id] = { value: exam, timestamp: new Date().getTime() };
         
-
-      }).catch(() => {
+        result.data = exam;
+      }).catch((res) => {
+        console.log(res)
         result.errcode = 1;
-        result.errmsg = '问卷不存在或尚未开放'
+        result.errmsg = '问卷异常'
       })
-    result.data=exam;
+    else result.data=exam;
   }else{
     //清理过期数据
     let currentTime = new Date().getTime();

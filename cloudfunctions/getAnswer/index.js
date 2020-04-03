@@ -12,13 +12,13 @@ const _ = db.command;
 exports.main = async (event, context) => {
   let exam_id = event.exam_id;
   let res = {};
-  let field = { answer: true }
+  let field = { answer: true, endTime:true,type:true }
   if (Boolean(event.get_question))
   field.question = true;
   await db.collection('exam').doc(exam_id).field(field)
   .get().then(data => {
     res.data=data.data;
-    if(res.type==1&&new Date().getTime()< res.endTime.getTime()){
+    if(res.data.type==1&&new Date().getTime()< res.data.endTime.getTime()){
       res={errmsg:'考试未结束',errcode:1};
     }
   }).catch((res) => {
