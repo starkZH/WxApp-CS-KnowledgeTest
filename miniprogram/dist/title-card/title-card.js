@@ -40,9 +40,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    handleLike() {
-      this.setData({ isLiked: !this.data.isLiked });
-      this.triggerEvent('like');
-    },
+    // handleLike() {
+    //   this.setData({ isLiked: !this.data.isLiked });
+    //   this.triggerEvent('like');
+    // },
   }
 })

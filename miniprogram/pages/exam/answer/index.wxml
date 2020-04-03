@@ -29,24 +29,43 @@
 
     </view>
     <van-divider />
-    <view class="padding" style="font-size:18px;">
+    <view class="padding" style="font-size:18px;" wx:if="{{!showAnswer}}">
       <view class="col-1 margin-bottom" style="font-size:16px;">
       <text style="color:grey;margin-right:10px;" wx:if="{{exam_data.question[question_index].type==2}}">[判断]</text>
       <text style="color:grey;margin-right:10px;" wx:else>[{{exam_data.question[question_index].type==0?'单选':'多选'}}]</text>
         <text>{{question_index+1}}.{{exam_data.question[question_index].desc}}</text>
       </view>
       <van-checkbox-group value="{{ radio }}" bind:change="radioChange" wx:if="{{exam_data.question[question_index].type==1}}">
-        <van-checkbox  wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding"  checked-color="{{showAnswer?(provide_answer[question_index].value==radio?'#07c160':'#FF0000'):''}}">
+        <van-checkbox  wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding">
           {{index}}.{{item}}
         </van-checkbox>
       </van-checkbox-group>
       <van-radio-group value="{{ radio }}" bind:change="radioChange" wx:else>
-        <van-radio wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding" checked-color="{{showAnswer?(provide_answer[question_index].value==radio?'#07c160':'#FF0000'):''}}">
+        <van-radio wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding">
         {{index}}.{{item}}
         </van-radio>
       </van-radio-group>
-      
     </view>
+
+    <view class="padding" style="font-size:18px;" wx:if="{{showAnswer}}">
+      <view class="col-1 margin-bottom" style="font-size:16px;">
+      <text style="color:grey;margin-right:10px;" wx:if="{{exam_data.question[question_index].type==2}}">[判断]</text>
+      <text style="color:grey;margin-right:10px;" wx:else>[{{exam_data.question[question_index].type==0?'单选':'多选'}}]</text>
+        <text>{{question_index+1}}.{{exam_data.question[question_index].desc}}</text>
+      </view>
+      <van-checkbox-group value="{{ radio }}" bind:change="radioChange" wx:if="{{exam_data.question[question_index].type==1}}">
+        <van-checkbox  wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding"  checked-color="{{provide_answer[question_index].value==radio?'#07c160':'#FF0000'}}">
+          {{index}}.{{item}}
+        </van-checkbox>
+      </van-checkbox-group>
+      <van-radio-group value="{{ radio }}" bind:change="radioChange" wx:else>
+        <van-radio wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding" checked-color="{{provide_answer[question_index].value==radio?'#07c160':'#FF0000'}}">
+        {{index}}.{{item}}
+        </van-radio>
+      </van-radio-group>
+    </view>
+
+
     <view class="padding" style="font-size:18px;" wx:if="{{showAnswer}}">
       所选答案：{{radio}}
     </view>

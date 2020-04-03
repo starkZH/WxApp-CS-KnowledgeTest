@@ -144,7 +144,7 @@ Page({
       answer:this.data.answer
     });
   },
-  timeUp(e) {
+  timeUp() {
     // wx.showToast({
     //   title: 'End',
     //   icon:'none',
@@ -367,7 +367,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.timeUp();
   },
 
   /**

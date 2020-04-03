@@ -144,8 +144,8 @@ Component({
             }else{
               item.status = 2;
             }
-            item.openTime = new Date(item.openTime).toLocaleString()
-            item.endTime = new Date(item.endTime).toLocaleString()
+            item.openTime = util.formatTime(new Date(item.openTime))
+            item.endTime = util.formatTime(new Date(item.endTime))
           });
           that.setData({
             exam_list : that.data.exam_list
