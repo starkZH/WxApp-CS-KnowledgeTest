@@ -49,12 +49,22 @@ Page({
         success: res => {
           console.warn('[云函数] [getExam] 调用成功：', res)
           console.log(res)
+          if(res.result.errcode&&res.result.errcode==1)
+          {
+            wx.hideLoading();
+            wx.navigateBack();
+            wx.showToast({
+              icon: 'none',
+              title: '该测试尚未开放',
+            })
+            return ;
+          }
           this.data.exam_data = res.result.data;
           let endtime = this.data.exam_data.endTime;
           this.data.exam_id = options.exam_id;
-          this.data.exam_data.openTime = new Date(this.data.exam_data.openTime).toLocaleString();
-          this.data.exam_data.endTime = new Date(endtime).toLocaleString();
-          this.data.exam_data.deadline = new Date(new Date(endtime).getTime()-1800000).toLocaleString();
+          this.data.exam_data.openTime = util.formatTime(new Date(this.data.exam_data.openTime));
+          this.data.exam_data.endTime = util.formatTime(new Date(endtime));
+          this.data.exam_data.deadline = util.formatTime(new Date(new Date(endtime).getTime()-1800000));
           this.setData({
             exam_id:this.data.exam_id,
             exam_data:this.data.exam_data,
@@ -141,7 +151,7 @@ Page({
       },1500)
       return false;
     }
-    if(this.data.exam_data.openTime>(new Date()).toLocaleString())
+    if(this.data.exam_data.openTime>util.formatTime(new Date()))
     {
       wx.showToast({
         title: '答题尚未未开放，请留意开放时间',
@@ -151,7 +161,7 @@ Page({
       });
       return false;
     }
-    if(this.data.exam_data.deadline<(new Date()).toLocaleString())
+    if(this.data.exam_data.deadline<util.formatTime(new Date()))
     {
       wx.showToast({
         title: '本次答题已结束，感谢您的关注',
