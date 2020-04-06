@@ -1,0 +1,44 @@
+<!--miniprogram/pages/bindUserInfo/index.wxml-->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">登录</view>
+</cu-custom>
+<view class="margin-xl padding-xl bg-white radius shadow shadow-lg">
+  <view class="flex justify-center">
+    <block>
+          <view class='text-center'>
+            <view class="cu-avatar xl round solids" style="background-image:url({{userInfo.avatarUrl}})"></view>
+            <!-- <image src="/images/dingdong.png" mode="aspectFill"></image> -->
+            <view class="margin-top-sm">
+              <text>By:网安</text>
+            </view>
+          </view>
+    </block>
+  </view>
+</view>
+<form>
+<view class="cu-form-group margin-top">
+		<view class="title">学号/工号</view>
+		<input placeholder="Number"  value="{{casid}}" bindinput="casidChange"></input>
+		<!-- <view class="cu-capsule radius">
+			<view class="cu-tag bg-blue">
+				+86
+			</view>
+			<view class="cu-tag line-blue">
+				中国大陆
+			</view>
+		</view> -->
+</view>
+<!-- <view class="cu-form-group">
+		<view class="title">验证码</view>
+		<input placeholder="请输入验证码"></input>
+		<button class="cu-btn bg-green shadow" disabled="{{counting==true?'true':''}}" bindtap="SendValidate">{{timeCountDownTop}}</button>
+</view> -->
+<view class="cu-form-group">
+		<view class="title">姓名</view>
+		<input password="{{false}}" placeholder="Name" value="{{name}}" bindinput="nameChange"></input>
+		<button class="cu-btn bg-blue shadow" open-type="getUserInfo" bindgetuserinfo="getUserInfo">绑定</button>
+</view>
+</form>
+<!-- <text>pages/public/login/login.wxml</text> -->
+

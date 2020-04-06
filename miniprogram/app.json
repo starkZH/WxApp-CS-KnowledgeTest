@@ -6,7 +6,8 @@
     "pages/exam/result/index",
     "pages/webview/index",
     "pages/collection/index",
-    "pages/collection/detail/index"
+    "pages/collection/detail/index",
+    "pages/bindUserInfo/index"
   ],
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
