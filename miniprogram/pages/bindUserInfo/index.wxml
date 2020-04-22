@@ -18,8 +18,8 @@
 </view>
 <form>
 <view class="cu-form-group margin-top">
-		<view class="title">学号/工号</view>
-		<input placeholder="Number"  value="{{casid}}" bindinput="casidChange"></input>
+		<view class="title">学号</view>
+		<input placeholder="中央认证学号"  value="{{casid}}" bindinput="casidChange"></input>
 		<!-- <view class="cu-capsule radius">
 			<view class="cu-tag bg-blue">
 				+86
@@ -34,11 +34,29 @@
 		<input placeholder="请输入验证码"></input>
 		<button class="cu-btn bg-green shadow" disabled="{{counting==true?'true':''}}" bindtap="SendValidate">{{timeCountDownTop}}</button>
 </view> -->
-<view class="cu-form-group">
+<!-- <view class="cu-form-group">
 		<view class="title">姓名</view>
 		<input password="{{false}}" placeholder="Name" value="{{name}}" bindinput="nameChange"></input>
 		<button class="cu-btn bg-blue shadow" open-type="getUserInfo" bindgetuserinfo="getUserInfo">绑定</button>
+</view> -->
+<view class="cu-form-group">
+		<view class="title">密码</view>
+		<input password="{{true}}" placeholder="密码" value="{{password}}" bindinput="passwordChange"></input>
+		<button class="cu-btn bg-blue shadow" open-type="getUserInfo" bindgetuserinfo="getUserInfo">绑定</button>
 </view>
 </form>
+<view class="solid-bottom padding">
+  <text class="text-gray">注：</text>
+</view>
+<view class="solid-bottom margin">
+  <text class="text-gray">1、此处属于学校统一身份中央认证，仅用于进行学生身份认证</text>
+</view>
+<view class="solid-bottom margin">
+  <text class="text-gray">2、若您对网络空间安全答题系统开启了二次验证登陆，可能会出现登陆异常情况</text>
+</view>
+<view class="solid-bottom margin">
+	<text class="text-gray">3、中央认证登陆请求由本机发出，小程序运营者无法获取到用户的账号及密码</text>
+</view>
+
 <!-- <text>pages/public/login/login.wxml</text> -->
 

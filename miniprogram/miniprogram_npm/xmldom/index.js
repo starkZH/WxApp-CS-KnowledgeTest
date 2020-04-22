@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1583507275385, function(require, module, exports) {
+__DEFINE__(1587461758269, function(require, module, exports) {
 function DOMParser(options){
 	this.options = options ||{locator:{}};
 	
@@ -258,8 +258,8 @@ exports.XMLSerializer = require('./dom').XMLSerializer ;
 exports.DOMParser = DOMParser;
 //}
 
-}, function(modId) {var map = {"./entities":1583507275386,"./sax":1583507275387,"./dom":1583507275388}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275386, function(require, module, exports) {
+}, function(modId) {var map = {"./entities":1587461758270,"./sax":1587461758271,"./dom":1587461758272}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758270, function(require, module, exports) {
 exports.entityMap = {
        lt: '<',
        gt: '>',
@@ -505,7 +505,7 @@ exports.entityMap = {
 };
 //for(var  n in exports.entityMap){console.log(exports.entityMap[n].charCodeAt())}
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275387, function(require, module, exports) {
+__DEFINE__(1587461758271, function(require, module, exports) {
 //[4]   	NameStartChar	   ::=   	":" | [A-Z] | "_" | [a-z] | [#xC0-#xD6] | [#xD8-#xF6] | [#xF8-#x2FF] | [#x370-#x37D] | [#x37F-#x1FFF] | [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF] | [#x3001-#xD7FF] | [#xF900-#xFDCF] | [#xFDF0-#xFFFD] | [#x10000-#xEFFFF]
 //[4a]   	NameChar	   ::=   	NameStartChar | "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]
 //[5]   	Name	   ::=   	NameStartChar (NameChar)*
@@ -1124,7 +1124,7 @@ exports.XMLReader = XMLReader;
 
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275388, function(require, module, exports) {
+__DEFINE__(1587461758272, function(require, module, exports) {
 /*
  * DOM Level 2
  * Object DOMException
@@ -2367,6 +2367,6 @@ try{
 //}
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1583507275385);
+return __REQUIRE__(1587461758269);
 })()
 //# sourceMappingURL=index.js.map

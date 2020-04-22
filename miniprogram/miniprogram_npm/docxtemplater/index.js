@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1583507275361, function(require, module, exports) {
+__DEFINE__(1587461758245, function(require, module, exports) {
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -392,8 +392,8 @@ Docxtemplater.XmlTemplater = require("./xml-templater");
 Docxtemplater.FileTypeConfig = require("./file-type-config");
 Docxtemplater.XmlMatcher = require("./xml-matcher");
 module.exports = Docxtemplater;
-}, function(modId) {var map = {"./doc-utils":1583507275362,"./traits":1583507275365,"./module-wrapper":1583507275366,"./errors":1583507275363,"./modules/common":1583507275367,"./lexer":1583507275368,"./xml-templater":1583507275369,"./file-type-config":1583507275378,"./xml-matcher":1583507275371}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275362, function(require, module, exports) {
+}, function(modId) {var map = {"./doc-utils":1587461758246,"./traits":1587461758249,"./module-wrapper":1587461758250,"./errors":1587461758247,"./modules/common":1587461758251,"./lexer":1587461758252,"./xml-templater":1587461758253,"./file-type-config":1587461758262,"./xml-matcher":1587461758255}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758246, function(require, module, exports) {
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -938,8 +938,8 @@ module.exports = {
   concatArrays: concatArrays,
   charMap: charMap
 };
-}, function(modId) { var map = {"./errors":1583507275363,"./utils":1583507275364}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275363, function(require, module, exports) {
+}, function(modId) { var map = {"./errors":1587461758247,"./utils":1587461758248}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758247, function(require, module, exports) {
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -1319,8 +1319,8 @@ module.exports = {
   throwXmlTagNotFound: throwXmlTagNotFound,
   throwXmlInvalid: throwXmlInvalid
 };
-}, function(modId) { var map = {"./utils":1583507275364}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275364, function(require, module, exports) {
+}, function(modId) { var map = {"./utils":1587461758248}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758248, function(require, module, exports) {
 
 
 function last(a) {
@@ -1336,7 +1336,7 @@ module.exports = {
   first: first
 };
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275365, function(require, module, exports) {
+__DEFINE__(1587461758249, function(require, module, exports) {
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -1589,8 +1589,8 @@ module.exports = {
   expandToOne: expandToOne,
   getExpandToDefault: getExpandToDefault
 };
-}, function(modId) { var map = {"./doc-utils":1583507275362,"./errors":1583507275363}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275366, function(require, module, exports) {
+}, function(modId) { var map = {"./doc-utils":1587461758246,"./errors":1587461758247}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758250, function(require, module, exports) {
 
 
 function emptyFun() {}
@@ -1629,7 +1629,7 @@ module.exports = function (module) {
   return module;
 };
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275367, function(require, module, exports) {
+__DEFINE__(1587461758251, function(require, module, exports) {
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1728,8 +1728,8 @@ function () {
 module.exports = function () {
   return wrapper(new Common());
 };
-}, function(modId) { var map = {"../module-wrapper":1583507275366}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275368, function(require, module, exports) {
+}, function(modId) { var map = {"../module-wrapper":1587461758250}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758252, function(require, module, exports) {
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -2244,8 +2244,8 @@ module.exports = {
     return parsed;
   }
 };
-}, function(modId) { var map = {"./errors":1583507275363,"./doc-utils":1583507275362}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275369, function(require, module, exports) {
+}, function(modId) { var map = {"./errors":1587461758247,"./doc-utils":1587461758246}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758253, function(require, module, exports) {
 
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2511,8 +2511,8 @@ function () {
 
   return XmlTemplater;
 }();
-}, function(modId) { var map = {"./doc-utils":1583507275362,"./scope-manager":1583507275370,"./xml-matcher":1583507275371,"./errors":1583507275363,"./lexer":1583507275368,"./parser.js":1583507275372,"./render.js":1583507275374,"./postrender.js":1583507275375,"./resolve.js":1583507275376,"./join-uncorrupt":1583507275377}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275370, function(require, module, exports) {
+}, function(modId) { var map = {"./doc-utils":1587461758246,"./scope-manager":1587461758254,"./xml-matcher":1587461758255,"./errors":1587461758247,"./lexer":1587461758252,"./parser.js":1587461758256,"./render.js":1587461758258,"./postrender.js":1587461758259,"./resolve.js":1587461758260,"./join-uncorrupt":1587461758261}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758254, function(require, module, exports) {
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -2736,8 +2736,8 @@ module.exports = function (options) {
   options.scopeList = [options.tags];
   return new ScopeManager(options);
 };
-}, function(modId) { var map = {"./errors":1583507275363,"./utils":1583507275364}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275371, function(require, module, exports) {
+}, function(modId) { var map = {"./errors":1587461758247,"./utils":1587461758248}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758255, function(require, module, exports) {
  // res class responsibility is to parse the XML.
 
 var _require = require("./doc-utils"),
@@ -2806,8 +2806,8 @@ module.exports = function xmlMatcher(content, tagsXmlArray) {
   res.matches = pregMatchAll(regexp, res.content);
   return handleRecursiveCase(res);
 };
-}, function(modId) { var map = {"./doc-utils":1583507275362}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275372, function(require, module, exports) {
+}, function(modId) { var map = {"./doc-utils":1587461758246}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758256, function(require, module, exports) {
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -2949,8 +2949,8 @@ var parser = {
   }
 };
 module.exports = parser;
-}, function(modId) { var map = {"./doc-utils":1583507275362,"./prefix-matcher":1583507275373}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275373, function(require, module, exports) {
+}, function(modId) { var map = {"./doc-utils":1587461758246,"./prefix-matcher":1587461758257}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758257, function(require, module, exports) {
 
 
 function match(condition, placeHolderContent) {
@@ -2985,7 +2985,7 @@ module.exports = {
   getValues: getValues
 };
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275374, function(require, module, exports) {
+__DEFINE__(1587461758258, function(require, module, exports) {
 
 
 var _require = require("./doc-utils"),
@@ -3052,8 +3052,8 @@ function render(options) {
 }
 
 module.exports = render;
-}, function(modId) { var map = {"./doc-utils":1583507275362,"./errors":1583507275363}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275375, function(require, module, exports) {
+}, function(modId) { var map = {"./doc-utils":1587461758246,"./errors":1587461758247}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758259, function(require, module, exports) {
 
 
 function postrender(parts, options) {
@@ -3068,7 +3068,7 @@ function postrender(parts, options) {
 
 module.exports = postrender;
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275376, function(require, module, exports) {
+__DEFINE__(1587461758260, function(require, module, exports) {
 
 
 function moduleResolve(part, options) {
@@ -3145,7 +3145,7 @@ function resolve(options) {
 
 module.exports = resolve;
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275377, function(require, module, exports) {
+__DEFINE__(1587461758261, function(require, module, exports) {
 
 
 function joinUncorrupt(parts, contains) {
@@ -3198,7 +3198,7 @@ function joinUncorrupt(parts, contains) {
 
 module.exports = joinUncorrupt;
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275378, function(require, module, exports) {
+__DEFINE__(1587461758262, function(require, module, exports) {
 
 
 var loopModule = require("./modules/loop");
@@ -3284,8 +3284,8 @@ module.exports = {
   docx: DocXFileTypeConfig,
   pptx: PptXFileTypeConfig
 };
-}, function(modId) { var map = {"./modules/loop":1583507275379,"./modules/space-preserve":1583507275380,"./modules/rawxml":1583507275381,"./modules/expand-pair-trait":1583507275382,"./modules/render":1583507275384}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275379, function(require, module, exports) {
+}, function(modId) { var map = {"./modules/loop":1587461758263,"./modules/space-preserve":1587461758264,"./modules/rawxml":1587461758265,"./modules/expand-pair-trait":1587461758266,"./modules/render":1587461758268}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758263, function(require, module, exports) {
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -3634,8 +3634,8 @@ function () {
 module.exports = function () {
   return wrapper(new LoopModule());
 };
-}, function(modId) { var map = {"../doc-utils":1583507275362,"../module-wrapper":1583507275366}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275380, function(require, module, exports) {
+}, function(modId) { var map = {"../doc-utils":1587461758246,"../module-wrapper":1587461758250}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758264, function(require, module, exports) {
 
 
 var wrapper = require("../module-wrapper");
@@ -3754,8 +3754,8 @@ var spacePreserve = {
 module.exports = function () {
   return wrapper(spacePreserve);
 };
-}, function(modId) { var map = {"../module-wrapper":1583507275366,"../doc-utils":1583507275362}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275381, function(require, module, exports) {
+}, function(modId) { var map = {"../module-wrapper":1587461758250,"../doc-utils":1587461758246}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758265, function(require, module, exports) {
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3907,8 +3907,8 @@ function () {
 module.exports = function () {
   return wrapper(new RawXmlModule());
 };
-}, function(modId) { var map = {"../traits":1583507275365,"../doc-utils":1583507275362,"../errors":1583507275363,"../module-wrapper":1583507275366}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275382, function(require, module, exports) {
+}, function(modId) { var map = {"../traits":1587461758249,"../doc-utils":1587461758246,"../errors":1587461758247,"../module-wrapper":1587461758250}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758266, function(require, module, exports) {
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -4099,8 +4099,8 @@ var expandPairTrait = {
 module.exports = function () {
   return wrapper(expandPairTrait);
 };
-}, function(modId) { var map = {"../mergesort":1583507275383,"../doc-utils":1583507275362,"../module-wrapper":1583507275366,"../traits":1583507275365,"../errors":1583507275363}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275383, function(require, module, exports) {
+}, function(modId) { var map = {"../mergesort":1587461758267,"../doc-utils":1587461758246,"../module-wrapper":1587461758250,"../traits":1587461758249,"../errors":1587461758247}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1587461758267, function(require, module, exports) {
 
 
 function getMinFromArrays(arrays, state) {
@@ -4146,7 +4146,7 @@ module.exports = function (arrays) {
   return resultArray;
 };
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1583507275384, function(require, module, exports) {
+__DEFINE__(1587461758268, function(require, module, exports) {
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4336,7 +4336,7 @@ function () {
 module.exports = function () {
   return wrapper(new Render());
 };
-}, function(modId) { var map = {"../module-wrapper":1583507275366,"../errors":1583507275363,"../doc-utils":1583507275362}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1583507275361);
+}, function(modId) { var map = {"../module-wrapper":1587461758250,"../errors":1587461758247,"../doc-utils":1587461758246}; return __REQUIRE__(map[modId], modId); })
+return __REQUIRE__(1587461758245);
 })()
 //# sourceMappingURL=index.js.map
