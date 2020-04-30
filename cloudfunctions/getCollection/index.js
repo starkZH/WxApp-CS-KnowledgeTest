@@ -38,9 +38,14 @@ exports.main = async (event, context) => {
       .field({
         "question.$": true
       }).get().then((res) => {
+        if(res.data.length>0)
         item.question = res.data[0].question[0]
+        else{
+          item.invalid = 1;
+          db.collection('wrong_collection').doc(item.id).remove();
+        }
       });
-
+    if (item.invalid )continue;
     //获取答案
     await db.collection('exam').where({
       _id: val.exam_id,
