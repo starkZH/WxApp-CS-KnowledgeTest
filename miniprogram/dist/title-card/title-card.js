@@ -40,6 +40,43 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    goPage(e){
+      // console.log(e);
+      // console.log(this.data.exam_id);
+      // return ;
+      wx.cloud.callFunction({
+        name: 'checkBinded',
+        data: {},
+        success: res => {
+          console.log('[云函数] [checkBinded] 调用成功：', res)
+          if(!res.result.status)
+          {
+            wx.showToast({
+              icon: 'none',
+              title: '请先进行学生认证',
+              mask:true
+            })
+            setTimeout(()=>{
+              wx.navigateTo({
+                url: '/pages/bindUserInfo/index',
+              })
+            },500)
+          }else{
+            wx.navigateTo({
+              url: '/pages/exam/index?exam_id='+this.data.exam_id,
+            })
+          }
+          
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '调用失败'
+          })
+          console.error('[云函数] [checkBinded] 调用失败：', err)
+        }
+      })
+    }
     // handleLike() {
     //   this.setData({ isLiked: !this.data.isLiked });
     //   this.triggerEvent('like');

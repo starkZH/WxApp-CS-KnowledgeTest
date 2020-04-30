@@ -161,7 +161,8 @@ Page({
       });
       return false;
     }
-    if(this.data.exam_data.deadline<util.formatTime(new Date()))
+    // if(this.data.exam_data.deadline<util.formatTime(new Date()))
+    if(this.data.exam_data.endTime<util.formatTime(new Date()))
     {
       wx.showToast({
         title: '本次答题已结束，感谢您的关注',
@@ -202,7 +203,7 @@ Page({
             wx.redirectTo({
               url: '/pages/bindUserInfo/index',
             })
-          },1000)
+          },500)
         }
         
       },

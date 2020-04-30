@@ -1,7 +1,7 @@
 /* miniprogram/pages/exam/result/index.wxss */
-page{
+/* page{
   height:100%;
-}
+} */
 .background {
   padding-top: 5%;
   width: 100%;
@@ -10,6 +10,6 @@ page{
   background-size:100% 100%;
   z-index: -1;
 }
-.indexes {
-  position: relative;
-}
+/* .indexes { */
+  /* position: relative; */
+/* } */

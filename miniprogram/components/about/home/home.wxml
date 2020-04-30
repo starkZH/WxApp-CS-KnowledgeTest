@@ -5,6 +5,7 @@
 </cu-custom> -->
 <scroll-view scroll-y class="scrollPage">
   <view class="UCenter-bg">
+    <!-- <image style="position: absolute;height: 120%;width: 160%;margin-bottom:10rpx;" src="../../../images/background.png"></image> -->
     <image src="../../../images/css.png" class="png" mode="widthFix" class="bounceIn"></image>
     <view class="text-xl padding">网安答题助手
       <text class="text-df">v1.0</text>
@@ -44,6 +45,13 @@
         <text class="cuIcon-favorfill text-blue"></text>
         <text class="text-grey">收藏</text>
       </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <view bindtap="centerLogin" class="content" hover-class="none">
+        <!-- <image src="/images/css.png" class="png" mode="aspectFit"></image> -->
+        <text class="cuIcon-form text-blue"></text>
+        <text class="text-grey">登陆</text>
+      </view>
     </view>
     <view class="cu-item arrow">
       <view class="content" bindtap="CopyLink" data-link="https://css.dgut.edu.cn/">

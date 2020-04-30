@@ -26,9 +26,13 @@
       <!-- <icon-button type='like' style='display: {{isLiked ? "none" : ""}};' bindtap='handleLike'></icon-button>
       <icon-button type='red-like' style='display: {{isLiked ? "" : "none"}};' bindtap='handleLike'></icon-button>
       <view class='like-number'>{{likeNumber}}</view> -->
-      <navigator url="/pages/exam/index?exam_id={{exam_id}}" hover-class="none">
+      <!-- <navigator url="/pages/exam/index?exam_id={{exam_id}}" hover-class="none"> -->
+        <!-- <view class="gotoAnswer">>前往答题</view> -->
+      <!-- </navigator> -->
+      <view bindtap="goPage" data-exam_id="{{exam_id}}" hover-class="none">
         <view class="gotoAnswer">>前往答题</view>
-      </navigator>
+      </view>
+
     </view>
   </view>
 </view>

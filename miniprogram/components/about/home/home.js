@@ -78,5 +78,34 @@ Component({
         current: 'https://www.charleschr.xyz/publicimages/payqrWechat.jpg' // 当前显示图片的http链接
       })
     },
+    centerLogin(){
+      wx.cloud.callFunction({
+        name: 'checkBinded',
+        data: {},
+        success: res => {
+          console.log('[云函数] [checkBinded] 调用成功：', res)
+          if(!res.result.status)
+          {
+              wx.navigateTo({
+                url: '/pages/bindUserInfo/index',
+              });
+          }else{
+            wx.showToast({
+              icon: 'none',
+              title: '您已成功进行学生认证',
+              mask:true
+            });
+          }
+          
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '调用失败'
+          })
+          console.error('[云函数] [checkBinded] 调用失败：', err)
+        }
+      })
+    }
   }
 })
