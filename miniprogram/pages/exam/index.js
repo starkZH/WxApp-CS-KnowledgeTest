@@ -161,7 +161,8 @@ Page({
       });
       return false;
     }
-    if(this.data.exam_data.deadline<util.formatTime(new Date()))
+    // if(this.data.exam_data.deadline<util.formatTime(new Date()))
+    if(this.data.exam_data.endTime<util.formatTime(new Date()))
     {
       wx.showToast({
         title: '本次答题已结束，感谢您的关注',
@@ -186,7 +187,34 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.cloud.callFunction({
+      name: 'checkBinded',
+      data: {},
+      success: res => {
+        console.log('[云函数] [checkBinded] 调用成功：', res)
+        if(!res.result.status)
+        {
+          wx.showToast({
+            icon: 'none',
+            title: '请先进行学生认证',
+            mask:true
+          })
+          setTimeout(()=>{
+            wx.redirectTo({
+              url: '/pages/bindUserInfo/index',
+            })
+          },500)
+        }
+        
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '调用失败'
+        })
+        console.error('[云函数] [checkBinded] 调用失败：', err)
+      }
+    })
   },
 
   /**

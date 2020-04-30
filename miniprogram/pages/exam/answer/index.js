@@ -1,6 +1,7 @@
 // miniprogram/pages/exam/answer/index.js
 // import Dialog from '../../..//miniprogram_npm/@vant/weapp/dialog/dialog';
 const app = getApp()
+var util = require('../../../utils/utils.js');
 Page({
 
   /**
@@ -336,6 +337,20 @@ Page({
             question:this.data.exam_data.question,
             showButton:true
           });
+          let now_time = new Date().getTime();
+          let end_time = new Date(this.data.exam_data.endTime).getTime();
+          if(end_time-now_time<1800000&&end_time-now_time>0)
+          {
+            this.data.time = end_time-now_time;
+            this.setData({
+              time:this.data.time
+            });
+          }else if(end_time-now_time<=0){
+            this.data.time = 0 * 60 * 1000;
+            this.setData({
+              time:this.data.time
+            });
+          }
           wx.hideLoading()
         },
         fail: err => {
