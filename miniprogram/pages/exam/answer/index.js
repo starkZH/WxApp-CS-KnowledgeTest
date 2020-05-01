@@ -339,13 +339,14 @@ Page({
           });
           let now_time = new Date().getTime();
           let end_time = new Date(this.data.exam_data.endTime).getTime();
-          if(end_time-now_time<1800000&&end_time-now_time>0)
+          // if(end_time-now_time<1800000&&end_time-now_time>0)
+          if(end_time-now_time>0)
           {
             this.data.time = end_time-now_time;
             this.setData({
               time:this.data.time
             });
-          }else if(end_time-now_time<=0){
+          }else{
             this.data.time = 0 * 60 * 1000;
             this.setData({
               time:this.data.time
