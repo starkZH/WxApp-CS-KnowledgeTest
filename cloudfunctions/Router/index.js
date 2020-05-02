@@ -173,14 +173,14 @@ async function deleteExam({ id }) {
   return result;
 }
 
-async function getRank({ exam_id }) {
+async function getRank(data) {
   let result = {};
   const res = await cloud.callFunction({
     name:'getRank',
-    data:{exam_id}
+    data:data
   })
   result = Result.put(res.result);
-  await db.collection('answer_formal').where({exam_id}).count().then(res=>{
+  await db.collection('answer_formal').where({exam_id:data.exam_id}).count().then(res=>{
     result.count = res.total;
   })
   return result; 
