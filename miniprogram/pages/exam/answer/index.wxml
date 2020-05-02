@@ -36,12 +36,12 @@
         <text>{{question_index+1}}.{{exam_data.question[question_index].desc}}</text>
       </view>
       <van-checkbox-group value="{{ radio }}" bind:change="radioChange" wx:if="{{exam_data.question[question_index].type==1}}">
-        <van-checkbox  wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding">
+        <van-checkbox icon-size="25px"  wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding">
           {{index}}.{{item}}
         </van-checkbox>
       </van-checkbox-group>
       <van-radio-group value="{{ radio }}" bind:change="radioChange" wx:else>
-        <van-radio wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding">
+        <van-radio icon-size="25px" wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding">
         {{index}}.{{item}}
         </van-radio>
       </van-radio-group>
@@ -54,12 +54,12 @@
         <text>{{question_index+1}}.{{exam_data.question[question_index].desc}}</text>
       </view>
       <van-checkbox-group value="{{ radio }}" bind:change="radioChange" wx:if="{{exam_data.question[question_index].type==1}}">
-        <van-checkbox  wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding"  checked-color="{{provide_answer[question_index].value==radio?'#07c160':'#FF0000'}}">
+        <van-checkbox icon-size="25px" wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding"  checked-color="{{provide_answer[question_index].value==radio?'#07c160':'#FF0000'}}">
           {{index}}.{{item}}
         </van-checkbox>
       </van-checkbox-group>
       <van-radio-group value="{{ radio }}" bind:change="radioChange" wx:else>
-        <van-radio wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding" checked-color="{{provide_answer[question_index].value==radio?'#07c160':'#FF0000'}}">
+        <van-radio icon-size="25px" wx:for="{{exam_data.question[question_index].option}}" wx:key="index" name="{{index}}" class="padding" checked-color="{{provide_answer[question_index].value==radio?'#07c160':'#FF0000'}}">
         {{index}}.{{item}}
         </van-radio>
       </van-radio-group>

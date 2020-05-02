@@ -95,6 +95,14 @@ Page({
   },
   startAnswer:function(e)
   {
+    if(this.data.showButton==false)
+    {
+      return ;
+    }
+    this.data.showButton = false;
+    this.setData({
+      showButton:this.data.showButton
+    });
     console.log(e)
     this.checkCanStart().then((res)=>{
       if(res)
@@ -148,16 +156,24 @@ Page({
         wx.navigateTo({
           url: '/pages/exam/result/index?exam_id='+this.data.exam_id,
         })
+        this.data.showButton = true;
+        this.setData({
+          showButton:this.data.showButton
+        });
       },1500)
       return false;
     }
     if(this.data.exam_data.openTime>util.formatTime(new Date()))
     {
       wx.showToast({
-        title: '答题尚未未开放，请留意开放时间',
+        title: '答题尚未开放，请留意开放时间',
         icon: 'none',
         duration: 2000,
         mask: true
+      });
+      this.data.showButton = true;
+      this.setData({
+        showButton:this.data.showButton
       });
       return false;
     }
@@ -169,6 +185,10 @@ Page({
         icon: 'none',
         duration: 2000,
         mask: true
+      });
+      this.data.showButton = true;
+      this.setData({
+        showButton:this.data.showButton
       });
       return false;
     }
