@@ -24,7 +24,7 @@ exports.main = async (event, context) => {
     data=res.data;
   });
   //尚未进行排名，则先排名后返回
-  if(!data.rank){
+  if(!data.rank||!data.rank.length){
     result = await cloud.callFunction({
       name: 'calculateRank',
       data: { exam_id }
