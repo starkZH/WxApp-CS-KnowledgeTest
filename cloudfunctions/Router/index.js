@@ -180,9 +180,7 @@ async function getRank(data) {
     data:data
   })
   result = Result.put(res.result);
-  await db.collection('answer_formal').where({exam_id:data.exam_id}).count().then(res=>{
-    result.count = res.total;
-  })
+  result.count = result.data.count
   return result; 
 }
 
