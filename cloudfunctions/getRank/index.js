@@ -65,9 +65,12 @@ exports.main = async (event, context) => {
     return result;
   }
   let exam_id = event.exam_id;
-  await db.collection('exam').doc(exam_id).field({rank:true}).get().then((res)=>{
+  await db.collection('exam').doc(exam_id).field({rank:true,endTime:true}).get().then((res)=>{
     data = res.data;
   });
+  let current=new Date().getTime() , endTime = data.endTime.getTime();
+  if(current<=endTime)
+    return {errmsg:'比赛尚未结束，不能排名',code:1}
   //尚未进行排名，则先排名后返回
   if(!data.rank||!data.rank.length){
     result = await cloud.callFunction({
